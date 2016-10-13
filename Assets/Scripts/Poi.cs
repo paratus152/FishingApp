@@ -75,14 +75,17 @@ public class Poi : Token {
 	{
 		
 		foreach(var item in e){
-			Debug.Log("fujiwara ," + myName);
-			Debug.Log("Name:" + item.id + ", state:" + item.state + ", myName" + myName);
-			if(myName == item.id && item.state == "1"){
-				Debug.Log("同じ名前と結果やんけ！"+ myName);
+			//Debug.Log("fujiwara ," + myName);
+			//Debug.Log("Name:" + item.id + ", state:" + item.state + ", myName:" + myName);
+			//if(myName == item.id && item.state == "1"){
+				//Debug.Log("同じ名前と結果やんけ！"+ myName);
+			if(item.state == "1"){
 				senstickStatus = true;
+				Debug.Log("Name:" + item.id + ", state:" + item.state + ", myName:" + myName);
+
 			}
 			else if(myName == item.id && item.state=="0"){
-				Debug.Log("違うのかよ!");
+				//Debug.Log("違うのかよ!");
 				senstickStatus = false;
 			}
 		}
