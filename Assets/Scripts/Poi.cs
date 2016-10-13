@@ -107,8 +107,10 @@ public class Poi : Token {
 	 * </ol>
 	 */
 	void OnTriggerEnter2D(Collider2D other){
-		if (senstickStatus) {
+		Destroy (other);
+		if (senstickStatus && other.tag == "fish") {
 			//魚デストロォイ！！
+			Destroy(other);
 
 		}
 	}
