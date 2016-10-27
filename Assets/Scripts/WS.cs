@@ -60,7 +60,8 @@ public class WS : MonoBehaviour {
 	{
 
 		System.Threading.Thread.Sleep(1000);
-		ws = new WebSocket ("ws://163.221.68.229:8080");
+		//ws = new WebSocket ("ws://163.221.68.229:8080");
+		ws = new WebSocket("ws://localhost:3000");
 
 		//イベントハンドラの登録
 		ws.OnOpen += (sender, e) =>
@@ -73,14 +74,11 @@ public class WS : MonoBehaviour {
 		{
 			obj = JsonConvert.DeserializeObject<List<Person>>(e.Data);
 			GetPoi.Translate(obj);
-			//Debug.Log("WebSocket Message Type: " + e.GetType() + "\nData: " + e.Data);
 		};
 
 		ws.OnError += (sender, e) =>
 		{
 			Debug.Log("WebSocket Error Message: " + e.Message);
-			//ws = new WebSocket ("ws://163.221.68.229:8080");
-			//ws.Close();
 			connectionState = 0;
 		};
 

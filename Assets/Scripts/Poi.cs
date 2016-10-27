@@ -33,6 +33,7 @@ public class Poi : Token {
 	public string myName;
 
 
+
 	/**
 	 * <ol>
 	 *   <li>ポイクラスの初期化処理</li>
@@ -81,7 +82,7 @@ public class Poi : Token {
 				//Debug.Log("同じ名前と結果やんけ！"+ myName);
 			if(item.state == "1"){
 				senstickStatus = true;
-				Debug.Log("Name:" + item.id + ", state:" + item.state + ", myName:" + myName);
+				//Debug.Log("Name:" + item.id + ", state:" + item.state + ", myName:" + myName);
 
 			}
 			else if(myName == item.id && item.state=="0"){
@@ -109,12 +110,11 @@ public class Poi : Token {
 	 *   <li>ポイと魚が衝突した場合の処理</li>
 	 * </ol>
 	 */
-	void OnTriggerEnter2D(Collider2D other){
-		Destroy (other);
+	void OnTriggerStay2D(Collider2D other){
+		Debug.Log ("tag:"+other.tag+"\tsenstick:"+senstickStatus);
 		if (senstickStatus && other.tag == "fish") {
 			//魚デストロォイ！！
-			Destroy(other);
-
+			GameObject.Destroy(other.gameObject);
 		}
 	}
 		
