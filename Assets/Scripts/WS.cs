@@ -17,7 +17,9 @@ public class WS : MonoBehaviour {
 	WebSocket ws;
 
 	GameObject poiObject;
-	Poi GetPoi;
+	Poi GetPoi1;
+	Poi GetPoi2;
+	Poi GetPoi3;
 
 	private int connectionState = 0;
 	private float timeleft;
@@ -29,26 +31,33 @@ public class WS : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//ws = new WebSocket("ws://localhost:3000/");
-		poiObject = GameObject.Find ("Poi_kari");
-		GetPoi = poiObject.GetComponent<Poi>();
+		poiObject = GameObject.Find ("Poi1");
+		GetPoi1 = poiObject.GetComponent<Poi>();
+
+		poiObject = GameObject.Find ("Poi2");
+		GetPoi2 = poiObject.GetComponent<Poi>();
+		poiObject = GameObject.Find ("Poi3");
+		GetPoi3 = poiObject.GetComponent<Poi>();
+
 		Connect ();
 
 	}
 
 	// Update is called once per frame
 	void Update () {
+		
 		if(connectionState == 2){
 			ws.Send ("Test Message");
 		}
 		timeleft -= Time.deltaTime;
 		if (timeleft <= 0.0) {
+			
 			timeleft = 1.0f;
 
 			if (connectionState == 0) {
 				Connect ();
 			}
 		}
-
 
 	}
 
@@ -60,8 +69,8 @@ public class WS : MonoBehaviour {
 	{
 
 		System.Threading.Thread.Sleep(1000);
-		//ws = new WebSocket ("ws://163.221.68.229:8080");
-		ws = new WebSocket("ws://localhost:3000");
+		ws = new WebSocket ("ws://163.221.126.97:8080");
+		//ws = new WebSocket("ws://localhost:3000");
 
 		//イベントハンドラの登録
 		ws.OnOpen += (sender, e) =>
@@ -73,7 +82,9 @@ public class WS : MonoBehaviour {
 		ws.OnMessage += (sender, e) =>
 		{
 			obj = JsonConvert.DeserializeObject<List<Person>>(e.Data);
-			GetPoi.Translate(obj);
+			GetPoi1.Translate(obj);
+			GetPoi2.Translate(obj);
+			GetPoi3.Translate(obj);
 		};
 
 		ws.OnError += (sender, e) =>
